@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import GameController from "./components/GameController";
+import "./styles/App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>The many shades of George Costanza</h1>
+      <p>16 independent Georges gets you royal...</p>
+      <p>...Click the same one twice gets you mohel</p>
+      <hr />
+      <GameController />
     </div>
   );
 }
