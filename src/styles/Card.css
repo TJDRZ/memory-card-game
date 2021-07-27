@@ -1,7 +1,14 @@
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: solid black;
+    border-radius: 10%;
     box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, .5);
     margin: 5px;
+    padding: 5px;
+    background-image: url("../imgs/let-there-be-sun.png");
 }
 
 .card:hover {
@@ -9,13 +16,26 @@
     cursor: pointer;
 }
 
+.card:hover > h2 {
+    box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 1);
+    cursor: pointer;
+}
+
+.card:hover > img {
+    box-shadow: 8px 8px 8px 1px coral;
+    cursor: pointer;
+}
+
 h2 {
     text-align: center;
     font-size: large;
+    border: double black;
+    background-color: coral;
+    padding: 5px;
 }
 
 img {
-    width:  200px;
-    height: 200px;
-    object-fit: cover;
+    width: 50%;
+    height: 50%;
+    border-radius: 5%;
 }

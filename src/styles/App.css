@@ -1,8 +1,10 @@
 body {
     display: flex;
     flex-direction: column;
+    background-image: linear-gradient(coral, rgb(201, 146, 29));
 }
 
 h1, p {
     text-align: center;
+    font-weight: bolder;
 }

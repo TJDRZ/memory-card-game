@@ -9,7 +9,6 @@ function Card(props) {
       }}
     >
       <h2>{props.name}</h2>
-      {String(props.clicked)}
       <img src={props.img} alt="Img Not Found" />
     </div>
   );

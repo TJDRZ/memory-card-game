@@ -89,7 +89,7 @@ function GameController() {
             <Score currentScore={currentScore} highScore={highScore} />
             <Card
               name={
-                "Loser! Lie in the gutter like bum, like a dog, like a mutt, like a mongrel, like an animal! ...click card to continue"
+                "Loser! Is that what you want? Huh? Do ya?! ...click card to continue"
               }
               img={mohel}
               setClicked={() => reset()}
