@@ -5,24 +5,24 @@
     align-items: center;
     border: solid black;
     border-radius: 10%;
-    box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, .5);
+    box-shadow: 8px 8px 8px 1px rgba(50, 50, 50, .5);
     margin: 5px;
     padding: 5px;
     background-image: url("../imgs/let-there-be-sun.png");
 }
 
 .card:hover {
-    box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 1);
+    box-shadow: 8px 8px 8px 1px rgba(50, 50, 50, 1);
     cursor: pointer;
 }
 
 .card:hover > h2 {
-    box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 1);
+    box-shadow: 8px 4px 8px 1px rgba(0, 0, 0, .75);
     cursor: pointer;
 }
 
 .card:hover > img {
-    box-shadow: 8px 8px 8px 1px coral;
+    box-shadow: 8px 4px 8px 1px coral;
     cursor: pointer;
 }
 

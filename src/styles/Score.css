@@ -1,4 +1,4 @@
 .score {
-    grid-column: 1 / 5;
+    grid-area: auto / 1 / auto / 3;
     font-size: large;
 }
