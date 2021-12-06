@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import uniqid from "uniqid";
+import "../styles/Container.css";
 import Card from "./Card";
 import Score from "./Score";
 import bald from "../imgs/bald.jpeg";
@@ -18,9 +21,6 @@ import smoker from "../imgs/smoker.jpeg";
 import yankee from "../imgs/yankee.jpeg";
 import mohel from "../imgs/mohel.jpeg";
 import royal from "../imgs/royal.jpg";
-import "../styles/Container.css";
-import { useState, useEffect } from "react";
-import uniqid from "uniqid";
 
 function GameController() {
   const [cards, setCards] = useState([
@@ -85,7 +85,7 @@ function GameController() {
     switch (player) {
       case "lose":
         return (
-          <div className="container">
+          <div className="Container">
             <Score currentScore={currentScore} highScore={highScore} />
             <Card
               name={
@@ -99,7 +99,7 @@ function GameController() {
 
       case "win":
         return (
-          <div className="container">
+          <div className="Container">
             <Score currentScore={currentScore} highScore={highScore} />
             <Card
               name={
@@ -113,7 +113,7 @@ function GameController() {
 
       default:
         return (
-          <div className="container">
+          <div className="Container">
             <Score currentScore={currentScore} highScore={highScore} />
             {cards.map((card) => {
               return (

@@ -3,7 +3,7 @@ import "../styles/Card.css";
 function Card(props) {
   return (
     <div
-      className="card"
+      className="Card"
       onClick={() => {
         props.setClicked();
       }}
