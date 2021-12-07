@@ -5,7 +5,7 @@ function App() {
   return (
     <main className="App">
       <header>
-        <h1>The many shades of George Costanza</h1>
+        <h1>The many <span className="shade">shades</span> of George Costanza</h1>
         <p>16 independent Georges gets you royal...</p>
         <p>...Click the same one twice gets you mohel</p>
         <hr />
