@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import uniqid from "uniqid";
+import { useState, useEffect, useCallback } from "react";
 import "../styles/Container.css";
 import Card from "./Card";
 import Score from "./Score";
@@ -21,6 +20,7 @@ import smoker from "../imgs/smoker.jpeg";
 import yankee from "../imgs/yankee.jpeg";
 import mohel from "../imgs/mohel.jpeg";
 import royal from "../imgs/royal.jpg";
+import { CardType } from "../types/types";
 
 function GameController() {
   const [cards, setCards] = useState([
@@ -43,10 +43,16 @@ function GameController() {
   ]);
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [player, setPlayer] = useState("play");
+  const [gameStatus, setGameStatus] = useState("playing");
+
+  const reset = () => {
+    cards.forEach((card) => (card.clicked = false));
+    setGameStatus("playing");
+    setCurrentScore(0);
+  };
 
   const shuffle = () => {
-    let arr = [...cards];
+    const arr = [...cards];
     for (let i = arr.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -55,83 +61,69 @@ function GameController() {
   };
 
   useEffect(() => {
-    let newHigh = 0;
-    highScore < currentScore ? (newHigh = currentScore) : (newHigh = highScore);
-    setHighScore(newHigh);
+    if (highScore < currentScore) {
+      setHighScore(currentScore);
+    }
     if (currentScore === 16) {
-      setPlayer("win");
+      setGameStatus("win");
     }
     shuffle();
   }, [currentScore, highScore]);
 
-  const setClicked = (card) => {
-    if (card.clicked === false) {
-      card.clicked = true;
-      setCurrentScore(currentScore + 1);
-    } else {
-      cards.forEach((card) => (card.clicked = false));
-      setCurrentScore(0);
-      setPlayer("lose");
-    }
-  };
+  const gameCheck = useCallback(
+    (card: CardType) => {
+      setCards(
+        cards.map((item) =>
+          item.name === card.name ? { ...item, clicked: true } : item
+        )
+      );
+      if (card.clicked) {
+        setGameStatus("lose");
+      } else {
+        setCurrentScore(currentScore + 1);
+      }
+    },
+    [currentScore, cards]
+  );
 
-  const reset = () => {
-    cards.forEach((card) => (card.clicked = false));
-    setPlayer("play");
-    setCurrentScore(0);
-  };
-
-  const renderSwitch = (player) => {
-    switch (player) {
+  const renderSwitch = (gameStatus: string) => {
+    switch (gameStatus) {
       case "lose":
         return (
-          <div className="Container">
-            <Score currentScore={currentScore} highScore={highScore} />
-            <Card
-              name={
-                "Loser! Is that what you want? Huh? Do ya?! ...click card to continue"
-              }
-              img={mohel}
-              setClicked={() => reset()}
-            />
+          <div className="Card" onClick={reset}>
+            <p>
+              "Loser! Is that what you want? Huh? Do ya?! ...click card to
+              continue"
+            </p>
+            <img src={mohel} alt={"Mohel"} />
+            <p>Click to continue...</p>
           </div>
         );
-
       case "win":
         return (
-          <div className="Container">
-            <Score currentScore={currentScore} highScore={highScore} />
-            <Card
-              name={
-                "Winner! I beg your pardon your majesty...click card to continue"
-              }
-              img={royal}
-              setClicked={() => reset()}
-            />
+          <div className="Card" onClick={reset}>
+            <p>
+              "Winner! I beg your pardon your majesty...click card to continue"
+            </p>
+            <img src={royal} alt={"King George"} />
+            <p>Click to continue...</p>
           </div>
         );
-
       default:
-        return (
-          <div className="Container">
-            <Score currentScore={currentScore} highScore={highScore} />
-            {cards.map((card) => {
-              return (
-                <Card
-                  name={card.name}
-                  img={card.img}
-                  clicked={card.clicked}
-                  key={uniqid()}
-                  setClicked={() => setClicked(card)}
-                />
-              );
-            })}
-          </div>
-        );
+        return cards.map((card) => {
+          return (
+            <Card key={crypto.randomUUID()} card={card} gameCheck={gameCheck} />
+          );
+        });
     }
   };
 
-  return renderSwitch(player);
+  return (
+    <div className="Container">
+      <Score currentScore={currentScore} highScore={highScore} />
+      {renderSwitch(gameStatus)}
+    </div>
+  );
 }
 
 export default GameController;
